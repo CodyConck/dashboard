@@ -93,7 +93,7 @@ export default function Nav() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            Welcome
           </Typography>
         </Toolbar>
       </AppBar>
