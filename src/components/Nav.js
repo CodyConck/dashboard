@@ -18,7 +18,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import ImageScroller from "./ImageScroller";
+// import ImageScroller from "./ImageScroller";
 
 const drawerWidth = 240;
 
@@ -149,7 +149,7 @@ export default function Nav() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <ImageScroller />
+        {/* <ImageScroller /> */}
       </Main>
     </Box>
   );
