@@ -5,7 +5,13 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 export default function ImageScroller() {
   return (
-    <ImageList sx={{ width: 500, height: 450 }}>
+    <ImageList
+      sx={{
+        width: 500,
+        height: 450,
+        marginLeft: "25px",
+      }}
+    >
       {itemData.map((item) => (
         <ImageListItem key={item.img}>
           <img
