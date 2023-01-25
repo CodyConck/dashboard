@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const api = {
   key: "e75aa5e68edd6ab995431322cabca5dc",
@@ -6,6 +6,20 @@ const api = {
 };
 
 const Weather = () => {
+  const [query, setQuery] = useState("");
+  const [weather, setWeather] = useState({});
+
+  const search = (e) => {
+    if (e.key === "Enter") {
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+          setQuery("");
+          console.log(result);
+        });
+    }
+  };
   const dateBuilder = (d) => {
     let months = [
       "January",
@@ -40,18 +54,41 @@ const Weather = () => {
   };
 
   return (
-    <div className="weather-container">
+    <div
+      className={
+        typeof weather.main != "undefined"
+          ? weather.main.temp > 16
+            ? "weather-container warm"
+            : "weather-container"
+          : "weather-container"
+      }
+    >
       <div className="search-box">
         <input
           type="text"
           className="search-bar"
-          placeholder="Search..."
+          placeholder="Search location for current weather..."
+          onChange={(e) => setQuery(e.target.value)}
+          value={query}
+          onKeyUpCapture={search}
         ></input>
       </div>
-      <div className="location-box">
-        <div className="location">Nashville, US</div>
-        <div className="date">{dateBuilder(new Date())}</div>
-      </div>
+      {typeof weather.main != "undefined" ? (
+        <div>
+          <div className="location-box">
+            <div className="location">
+              {weather.name},{weather.sys.country}
+            </div>
+            <div className="date">{dateBuilder(new Date())}</div>
+          </div>
+          <div className="weather-box">
+            <div className="temp">{Math.round(weather.main.temp)}°c</div>
+            <div className="weather">{weather.weather[0].main}</div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
